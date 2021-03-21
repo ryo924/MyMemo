@@ -8,9 +8,27 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State var searchText = ""
+    
     var body: some View {
-        Text("Hello World!!!!")
-            .padding()
+        NavigationView {
+            VStack {
+                TextField("検索", text: $searchText, onCommit: {
+                   //表示に関する処理
+                })
+                List {//登録したメモに置き換える
+                    Text("a")
+                }
+                .listStyle(PlainListStyle())
+            }
+            .navigationBarTitle("MyMemo")
+            .navigationBarItems(trailing:
+                NavigationLink(destination: RegistrationView()) {
+                    Image(systemName: "square.and.pencil")
+                }
+            )
+        }
     }
 }
 
