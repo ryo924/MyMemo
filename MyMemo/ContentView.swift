@@ -9,7 +9,9 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State var searchText = ""
+    @State var searchText: String = ""
+    @State var inputText: [String] = []
+    @State var new: String = ""
     
     var body: some View {
         NavigationView {
@@ -17,8 +19,19 @@ struct ContentView: View {
                 TextField("検索", text: $searchText, onCommit: {
                    //表示に関する処理
                 })
+                Divider()
+                TextEditor(text: $new)
+                Button(action: {
+                    self.inputText.append(self.new)
+                    self.new = ""
+                }) {
+                    Text("追加")
+                }
+                Divider()
                 List {//登録したメモに置き換える
-                    Text("a")
+                    ForEach(inputText, id: \.self) { user in
+                        Text(user)
+                    }
                 }
                 .listStyle(PlainListStyle())
             }
